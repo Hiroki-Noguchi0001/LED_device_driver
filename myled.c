@@ -30,7 +30,22 @@ static unsigned int five_in[5] = {5, 24, 27, 26, 6};
 static unsigned int six_in[6] = {22, 5, 24, 27, 26, 6};
 static unsigned int seven_in[3] = {24, 17, 27};
 static unsigned int eight_in[7] = {22, 5, 24, 17, 27, 26, 6};
-static unsigned int nine_in[5] = {24, 17, 27, 26, 6};
+static unsigned int nine_in[6] = {5, 24, 17, 27, 26, 6};
+
+static void led_effect(void)
+{
+	int loop, count;
+
+	for(count = 0; count < 10; count++)
+	{
+		for(loop = 0; loop < total_LED; loop++)
+		{
+			gpio_base[7] = 1 << LED_PIN[loop];
+			msleep(25);
+			gpio_base[10] = 1 << LED_PIN[loop];
+		}
+	}
+}
 
 static void led_power(int a)
 {
@@ -69,6 +84,11 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	else if(order == 'a')
 	{
 		led_power(1);
+	}
+
+	else if(order == 'r')
+	{
+		led_effect();
 	}
 
 	else if(order == '0')//0を表示
@@ -156,7 +176,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	else if(order == '9')//9を表示 
 	{
 		led_power(0);
-		for(loop = 0; loop < 5; loop++)
+		for(loop = 0; loop < 6; loop++)
 		{
 			gpio_base[7] = 1 << nine_in[loop];
 		}
