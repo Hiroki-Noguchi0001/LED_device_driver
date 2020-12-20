@@ -6,10 +6,9 @@
 #include <linux/io.h>
 #include <linux/delay.h>
 
-#define total_module 9 
 #define total_LED 8
 
-MODULE_AUTHOR("Hiroki Noguchi");
+MODULE_AUTHOR("Hiroki Noguchi & Ryuichi Ueda");
 MODULE_DESCRIPTION("driver for LED control");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.0.1");
@@ -19,11 +18,8 @@ static struct cdev cdv;
 static struct class *cls = NULL;
 static volatile u32 *gpio_base = NULL;
 
-static unsigned int module_PIN[total_module] = {22, 5, 24, 23, 17, 27, 26, 6, 16};
-static unsigned int buzzer_PIN = 16;
 static unsigned int LED_PIN[total_LED] = {22, 5, 24, 23, 17, 27, 26, 6};
 //1 = 22, 2 = 5, 4 = 24, 5 = 23, 6 = 17, 7 = 27, 9 = 26, 10 = 6 
-
 
 static unsigned int zero_in[6] = {22, 5, 24, 17, 27, 26};
 static unsigned int one_in[2] = {24, 17};
@@ -36,29 +32,11 @@ static unsigned int seven_in[3] = {24, 17, 27};
 static unsigned int eight_in[7] = {22, 5, 24, 17, 27, 26, 6};
 static unsigned int nine_in[5] = {24, 17, 27, 26, 6};
 
-
-
-static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_t* pos)
+static void led_power(int a)
 {
-	char c;
 	int loop;
-	if(copy_from_user(&c, buf, sizeof(char)))
-		return -EFAULT;
-	
-	if(c == 'c')
-	{
-		for(loop = 0; loop < total_module; loop++)
-		{
-			gpio_base[10] = 1 << module_PIN[loop];
-		}
-	}
 
-	else if(c == 'b')
-	{
-			gpio_base[7] = 1 << buzzer_PIN;
-	}
-
-	else if(c == 'a')
+	if(a == 1)
 	{
 		for(loop = 0; loop < total_LED; loop++)
 		{
@@ -66,131 +44,128 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		}
 	}
 
-	else if(c == '0')
+	else
 	{
 		for(loop = 0; loop < total_LED; loop++)
 		{
 			gpio_base[10] = 1 << LED_PIN[loop];
 		}
+	}
+}
+
+static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_t* pos)
+{
+	char order;
+	int loop;
+
+	if(copy_from_user(&order, buf, sizeof(char)))
+		return -EFAULT;
+	
+	if(order == 'c')
+	{
+		led_power(0);
+	}
+
+	else if(order == 'a')
+	{
+		led_power(1);
+	}
+
+	else if(order == '0')//0を表示
+	{
+		led_power(0);
 		for(loop = 0; loop < 6; loop++)
 		{
 			gpio_base[7] = 1 << zero_in[loop];
 		}
 	}
 
-	else if(c == '1')
+	else if(order == '1')//1を表示
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+		led_power(0);
 		for(loop = 0; loop < 2; loop++)
 		{
 			gpio_base[7] = 1 << one_in[loop];
 		}
 	}
 
-	else if(c == '2')
+	else if(order == '2')//2を表示
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+		led_power(0);
 		for(loop = 0; loop < 5; loop++)
 		{
 			gpio_base[7] = 1 << two_in[loop];
 		}
 	}
 
-	else if(c == '3')
+	else if(order == '3')//3を表示
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+
+		led_power(0);
 		for(loop = 0; loop < 5; loop++)
 		{
 			gpio_base[7] = 1 << three_in[loop];
 		}
 	}
 
-	else if(c == '4')
+	else if(order == '4')//4を表示
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+		led_power(0);
 		for(loop = 0; loop < 4; loop++)
 		{
 			gpio_base[7] = 1 << four_in[loop];
 		}
 	}
 
-	else if(c == '5')
+	else if(order == '5')//5を表示 
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+		led_power(0);
 		for(loop = 0; loop < 5; loop++)
 		{
 			gpio_base[7] = 1 << five_in[loop];
 		}
 	}
 
-	else if(c == '6')
+	else if(order == '6')//6を表示 
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+		led_power(0);
 		for(loop = 0; loop < 6; loop++)
 		{
 			gpio_base[7] = 1 << six_in[loop];
 		}
 	}
 
-	else if(c == '7')
+	else if(order == '7')//7を表示 
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+		led_power(0);
 		for(loop = 0; loop < 3; loop++)
 		{
 			gpio_base[7] = 1 << seven_in[loop];
 		}
 	}
 
-	else if(c == '8')
+	else if(order == '8')//8を表示 
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+		led_power(0);
 		for(loop = 0; loop < 7; loop++)
 		{
 			gpio_base[7] = 1 << eight_in[loop];
 		}
 	}
 
-	else if(c == '9')
+	else if(order == '9')//9を表示 
 	{
-		for(loop = 0; loop < total_LED; loop++)
-		{
-			gpio_base[10] = 1 << LED_PIN[loop];
-		}
+		led_power(0);
 		for(loop = 0; loop < 5; loop++)
 		{
 			gpio_base[7] = 1 << nine_in[loop];
 		}
 	}
-
-	printk(KERN_INFO "recive %c\n", c);
 	return 1;
 }
 
-	static struct file_operations led_fops = {
+	static struct file_operations led_fops = 
+{
 	.owner = THIS_MODULE,
 	.write = led_write,
 };
@@ -210,29 +185,29 @@ static int __init init_mod(void)
 
 	cdev_init(&cdv, &led_fops);
 	retval = cdev_add(&cdv, dev, 1);
-	if (retval < 0){
+	if (retval < 0)
+	{
 		printk(KERN_ERR "cdev_add failed major:%d, minor:%d\n", MAJOR(dev), MINOR(dev));
 		return retval;
 	}
 
 	cls = class_create(THIS_MODULE, "myled");
-	if(IS_ERR(cls)){
+	if(IS_ERR(cls))
+	{
 		printk(KERN_ERR "class_create failed.");
 		return PTR_ERR(cls);
 	}
 
 	device_create(cls, NULL, dev, NULL, "myled%d", MINOR(dev));
-
 	gpio_base = ioremap_nocache(0xfe200000, 0xA0);//物理アドレスから仮想アドレスの変換
 
-	for(loop = 0; loop < total_module; loop++)
+	for(loop = 0; loop < total_LED; loop++)
 	{
-		const u32 index = module_PIN[loop] / 10;
-		const u32 shift = (module_PIN[loop] % 10)*3;
+		const u32 index = LED_PIN[loop] / 10;
+		const u32 shift = (LED_PIN[loop] % 10)*3;
 		const u32 mask = ~(0x7 << shift);
 		gpio_base[index] = (gpio_base[index] & mask) | (0x1 << shift);
 	}
-
 	return 0;
 }
 
