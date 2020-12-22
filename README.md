@@ -6,42 +6,44 @@
 7セグLEDを使用して、任意の数字を出力することができます。
 
 ---
-## <動作環境>
+## 動作環境
 <br>
 os : ubuntu 20.04 server
-<br>
-PC : Raspberry Pi 4　
 
 ---
-## <使用したもの>
+## 使用したもの
 
-・ Raspberry Pi 4　× 1
+・ [Raspberry Pi4 model B 4GB](https://akizukidenshi.com/catalog/g/gM-14778/)　× 1
 <br>
-・ 7セグLED × 1
+・ [7セグLED](https://akizukidenshi.com/catalog/g/gI-04115/) × 1
 <br>
-・ 抵抗220Ω　× 8
+・ [抵抗220Ω](https://akizukidenshi.com/catalog/g/gR-07972/)　× 8
 <br>
-・ オスメスジャンパーピン × 9
+・ [オスメスジャンパーピン](https://akizukidenshi.com/catalog/g/gC-08934/) × 9
 <br>
-・ オスオスジャンパーピン × 2
-
----
-## <回路図>
-
----
-## <デモ動画>
+・ [オスオスジャンパーピン](https://akizukidenshi.com/catalog/g/gC-05159/) × 2
+<br>
+・ [ブレッドボード](https://akizukidenshi.com/catalog/g/gP-09257/) × 1
 
 ---
-## <インストール方法>
+## 回路図
+
+---
+## デモ動画
+
+---
+## インストール方法
 
 使用したいディレクトリ内で以下のコマンドを実行してください。
 <br>
 `$git clone https://github.com/Hiroki-Noguchi0001/LED_device_driver.git`
 <br>
+`$cd LED_device_driver`
+<br>
 `$make`
 
 ---
-## <使用方法>
+## 使用方法
 インストール・makeを終了させた後
 
 `$./led_control`
@@ -51,5 +53,5 @@ PC : Raspberry Pi 4　
 
 
 ---
-## <ライセンス>
+## ライセンス
 [GNU General Public License v3.0](https://github.com/Hiroki-Noguchi0001/LED_device_driver/blob/master/COPYING)
