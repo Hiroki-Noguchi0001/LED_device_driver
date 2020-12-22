@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 void output_number(int number)
@@ -55,41 +56,50 @@ void random_number(void)
 
 int main(void)
 {
-	int command;
+	char command[100];
+	int number;
 	system("clear");
 	printf("myledをロードします...\n");
 	system("sudo insmod myled.ko");
 	system("sudo chmod 666 /dev/myled0");
 	printf("出力したい数値を入力してください\n");
 	printf("*[0 ~ 9]まで出力できます\n");
-	printf("*[777]を入力する今日のラッキーナンバーが出力されます\n");
-	printf("*[123]を入力すると終了\n");
+	printf("*[0]を出力させる場合は[zero]と入力してください\n");
+	printf("*[random]を入力する今日のラッキーナンバーが出力されます\n");
+	printf("*[exit]を入力すると終了\n");
 
 	while(1)
 	{
-		scanf("%d", &command);
+		scanf("%s", command);
 
-		if(command < 10)
-		{
-			output_number(command);
-		}
-
-		else if(command == 123)
+		if(!strcmp(command, "exit"))
 		{
 			break;
 		}
-		else if(command == 777)
+		else if(!strcmp(command, "random"))
 		{
 			random_number();
+			continue;
+		}
+		else if(!strcmp(command, "zero"))
+		{
+			output_number(0);
+			continue;
+		}
+
+		number = atoi(command);
+		if(number < 10 && number > 0)
+		{
+			output_number(number);
 		}
 		else
 		{
-			printf("その数字は対応しておりません\n");
+			printf("対応した数字または文字ではありません\n");
 		}
 	}
 
 	system("echo c > /dev/myled0");
 	system("sudo rmmod myled");
 	printf("myledをアンロードしました\n");
-		return 0;
+	return 0;
 }
