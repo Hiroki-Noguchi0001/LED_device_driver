@@ -1,3 +1,6 @@
+//SPDX-License-Identifer: GPL-3.0
+// *Copyright (c) 2020 Hiroki Noguchi. All rights reserved.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
