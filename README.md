@@ -19,9 +19,9 @@
 
 ・ [抵抗220Ω](https://akizukidenshi.com/catalog/g/gR-07972/)　× 8
 
-・ [オスメスジャンパーピン](https://akizukidenshi.com/catalog/g/gC-08934/) × 9
+・ [オスメスジャンパーピン](https://akizukidenshi.com/catalog/g/gC-08934/) × 8
 
-・ [オスオスジャンパーピン](https://akizukidenshi.com/catalog/g/gC-05159/) × 2
+・ [オスオスジャンパーピン](https://akizukidenshi.com/catalog/g/gC-05159/) × 3
 
 ・ [ブレッドボード](https://akizukidenshi.com/catalog/g/gP-09257/) × 1
 
