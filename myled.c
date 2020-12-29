@@ -32,6 +32,7 @@ static unsigned int five_in[5] = {16, 19, 27, 23, 18};
 static unsigned int six_in[6] = {16, 19, 27, 17, 23, 18};
 static unsigned int seven_in[4] = {16, 20, 19, 23};
 static unsigned int nine_in[6] = {16, 20, 19, 27, 23, 18};
+static unsigned int error[5] = {16, 27, 17, 23, 18};
 
 static void led_effect(void)
 {
@@ -85,6 +86,15 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	else if(order == 'r')
 	{
 		led_effect();
+	}
+
+	else if(order == 'e')
+	{
+		led_power(0);
+		for(loop = 0; loop < 5; loop++)
+		{
+			gpio_base[7] = 1 << error[loop];
+		}
 	}
 
 	else if(order == '0')//0を表示

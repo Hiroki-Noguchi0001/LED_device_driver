@@ -98,6 +98,7 @@ int main(void)
 		else
 		{
 			printf("対応した数字または文字ではありません\n");
+			system("echo e > /dev/myled0");
 		}
 	}
 
