@@ -8,14 +8,14 @@
 ---
 ## 動作環境
 
-os : ubuntu 20.04 server
+### OS : ubuntu 20.04 server
 
 ---
 ## 使用したもの
 
 ・ [Raspberry Pi4 model B 4GB](https://akizukidenshi.com/catalog/g/gM-14778/)　× 1
 
-・ [7セグLED](https://akizukidenshi.com/catalog/g/gI-04115/) × 1
+・ [7セグLED](https://akizukidenshi.com/catalog/g/gI-04107/) × 1
 
 ・ [抵抗220Ω](https://akizukidenshi.com/catalog/g/gR-07972/)　× 8
 
@@ -28,7 +28,7 @@ os : ubuntu 20.04 server
 ---
 ## 回路図
 
-![回路図](https://raw.githubusercontent.com/Hiroki-Noguchi0001/LED_device_driver/images/image_1.png "回路図")
+![回路図](https://raw.githubusercontent.com/Hiroki-Noguchi0001/LED_device_driver/images/image1.png "回路図")
 
 
 | LED PIN    | GPIO        |
@@ -51,20 +51,29 @@ os : ubuntu 20.04 server
 使用したいディレクトリ内で以下のコマンドを実行してください。
 
 ```sh
-$git clone https://github.com/Hiroki-Noguchi0001/LED_device_driver.git
-$cd LED_device_driver
-$make
+$ git clone https://github.com/Hiroki-Noguchi0001/LED_device_driver.git
+$ cd LED_device_driver
+$ make
 ```
+ディレクトリ内の実行ファイルを削除する場合は
+
+```sh
+$ make clean
+```
+
+を実行してください。
 
 ---
 ## 使用方法
 インストール・makeを終了させた後
 
 ```sh
-$./led_control
+$ ./led_control
 ```
 
 を実行してください。
+
+実行すると、操作手順が出力されます。
 
 ---
 ## ライセンス
