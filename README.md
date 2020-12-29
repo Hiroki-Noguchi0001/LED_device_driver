@@ -79,6 +79,8 @@ $ ./led_control
 
 実行すると、操作手順が出力されます。
 
+操作手順に従って、楽しんでください。
+
 ---
 ## ライセンス
 [GNU General Public License v3.0](https://github.com/Hiroki-Noguchi0001/LED_device_driver/blob/master/COPYING)
