@@ -7,26 +7,40 @@
 
 ---
 ## 動作環境
-<br>
+
 os : ubuntu 20.04 server
 
 ---
 ## 使用したもの
 
 ・ [Raspberry Pi4 model B 4GB](https://akizukidenshi.com/catalog/g/gM-14778/)　× 1
-<br>
+
 ・ [7セグLED](https://akizukidenshi.com/catalog/g/gI-04115/) × 1
-<br>
+
 ・ [抵抗220Ω](https://akizukidenshi.com/catalog/g/gR-07972/)　× 8
-<br>
+
 ・ [オスメスジャンパーピン](https://akizukidenshi.com/catalog/g/gC-08934/) × 9
-<br>
+
 ・ [オスオスジャンパーピン](https://akizukidenshi.com/catalog/g/gC-05159/) × 2
-<br>
+
 ・ [ブレッドボード](https://akizukidenshi.com/catalog/g/gP-09257/) × 1
 
 ---
 ## 回路図
+
+![回路図](https://raw.githubusercontent.com/Hiroki-Noguchi0001/LED_device_driver/images/image_1.png "回路図")
+
+
+| LED PIN    | GPIO        |
+|:-----------|:------------|
+| A(7番ピン)  | :16         |
+| B(6番ピン)  | :20         |
+| C(4番ピン)  | :19         |
+| D(2番ピン)  | :27         |
+| E(1番ピン)  | :17         |
+| F(9番ピン)  | :23         |
+| G(10番ピン) | :18         |
+
 
 ---
 ## デモ動画
@@ -35,22 +49,22 @@ os : ubuntu 20.04 server
 ## インストール方法
 
 使用したいディレクトリ内で以下のコマンドを実行してください。
-<br>
-`$git clone https://github.com/Hiroki-Noguchi0001/LED_device_driver.git`
-<br>
-`$cd LED_device_driver`
-<br>
-`$make`
+
+```sh
+$git clone https://github.com/Hiroki-Noguchi0001/LED_device_driver.git
+$cd LED_device_driver
+$make
+```
 
 ---
 ## 使用方法
 インストール・makeを終了させた後
 
-`$./led_control`
+```sh
+$./led_control
+```
 
 を実行してください。
-<br>
-
 
 ---
 ## ライセンス
