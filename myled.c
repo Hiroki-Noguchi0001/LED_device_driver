@@ -1,3 +1,5 @@
+//SPDX-License-Identifer: GPL-3.0
+// *Copyright (c) 2020 Hiroki Noguchi. All rights reserved.
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
@@ -6,7 +8,7 @@
 #include <linux/io.h>
 #include <linux/delay.h>
 
-#define total_LED 8
+#define total_LED 7
 
 MODULE_AUTHOR("Hiroki Noguchi & Ryuichi Ueda");
 MODULE_DESCRIPTION("driver for LED control");
@@ -18,19 +20,17 @@ static struct cdev cdv;
 static struct class *cls = NULL;
 static volatile u32 *gpio_base = NULL;
 
-static unsigned int LED_PIN[total_LED] = {22, 5, 24, 23, 17, 27, 26, 6};
-//1 = 22, 2 = 5, 4 = 24, 5 = 23, 6 = 17, 7 = 27, 9 = 26, 10 = 6 
+static unsigned int LED_PIN[total_LED] = {16, 20, 19, 27, 17, 23, 18};
 
-static unsigned int zero_in[6] = {22, 5, 24, 17, 27, 26};
-static unsigned int one_in[2] = {24, 17};
-static unsigned int two_in[5] = {22, 5, 17, 27, 6};
-static unsigned int three_in[5] = {5, 24, 17, 27, 6};
-static unsigned int four_in[4] = {24, 17, 26, 6};
-static unsigned int five_in[5] = {5, 24, 27, 26, 6};
-static unsigned int six_in[6] = {22, 5, 24, 27, 26, 6};
-static unsigned int seven_in[3] = {24, 17, 27};
-static unsigned int eight_in[7] = {22, 5, 24, 17, 27, 26, 6};
-static unsigned int nine_in[6] = {5, 24, 17, 27, 26, 6};
+static unsigned int zero_in[6] = {16, 20, 19, 27, 17, 23};
+static unsigned int one_in[2] = {20, 19};
+static unsigned int two_in[5] = {16, 20, 27, 17, 18};
+static unsigned int three_in[5] = {16, 20, 19, 27, 18};
+static unsigned int four_in[4] = {20, 19, 23, 18};
+static unsigned int five_in[5] = {16, 19, 27, 23, 18};
+static unsigned int six_in[6] = {16, 19, 27, 17, 23, 18};
+static unsigned int seven_in[4] = {16, 20, 19, 23};
+static unsigned int nine_in[6] = {16, 20, 19, 27, 23, 18};
 
 static void led_effect(void)
 {
@@ -47,11 +47,11 @@ static void led_effect(void)
 	}
 }
 
-static void led_power(int a)
+static void led_power(int power)
 {
 	int loop;
 
-	if(a == 1)
+	if(power == 1)
 	{
 		for(loop = 0; loop < total_LED; loop++)
 		{
@@ -79,11 +79,6 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	if(order == 'c')
 	{
 		led_power(0);
-	}
-
-	else if(order == 'a')
-	{
-		led_power(1);
 	}
 
 	else if(order == 'r')
@@ -158,7 +153,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	else if(order == '7')//7を表示 
 	{
 		led_power(0);
-		for(loop = 0; loop < 3; loop++)
+		for(loop = 0; loop < 4; loop++)
 		{
 			gpio_base[7] = 1 << seven_in[loop];
 		}
@@ -167,10 +162,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	else if(order == '8')//8を表示 
 	{
 		led_power(0);
-		for(loop = 0; loop < 7; loop++)
-		{
-			gpio_base[7] = 1 << eight_in[loop];
-		}
+		led_power(1);
 	}
 
 	else if(order == '9')//9を表示 
