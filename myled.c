@@ -1,8 +1,6 @@
 //SPDX-License-Identifer: GPL-3.0
 // *Copyright (c) 2020 Hiroki Noguchi. All rights reserved.
-<<<<<<< HEAD
 
->>>>>>> 4aa6c84ad244a88478231d6881f6f53c62719b65
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
