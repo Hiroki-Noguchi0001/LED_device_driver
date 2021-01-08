@@ -8,46 +8,46 @@
 
 void output_number(int number)
 {
-		if(number == 0)
-		{
-			system("echo 0 > /dev/myled0");
-		}
-		else if(number == 1)
-		{
-			system("echo 1 > /dev/myled0");
-		}
-		else if(number == 2)
-		{
-			system("echo 2 > /dev/myled0");
-		}
-		else if(number == 3)
-		{
-			system("echo 3 > /dev/myled0");
-		}
-		else if(number == 4)
-		{
-			system("echo 4 > /dev/myled0");
-		}
-		else if(number == 5)
-		{
-			system("echo 5 > /dev/myled0");
-		}
-		else if(number == 6)
-		{
-			system("echo 6 > /dev/myled0");
-		}
-		else if(number == 7)
-		{
-			system("echo 7 > /dev/myled0");
-		}
-		else if(number == 8)
-		{
-			system("echo 8 > /dev/myled0");
-		}
-		else if(number == 9)
-		{
-			system("echo 9 > /dev/myled0");
-		}
+	if(number == 0)
+	{
+		system("echo 0 > /dev/myled0");
+	}
+	else if(number == 1)
+	{
+		system("echo 1 > /dev/myled0");
+	}
+	else if(number == 2)
+	{
+		system("echo 2 > /dev/myled0");
+	}
+	else if(number == 3)
+	{
+		system("echo 3 > /dev/myled0");
+	}
+	else if(number == 4)
+	{
+		system("echo 4 > /dev/myled0");
+	}
+	else if(number == 5)
+	{
+		system("echo 5 > /dev/myled0");
+	}
+	else if(number == 6)
+	{
+		system("echo 6 > /dev/myled0");
+	}
+	else if(number == 7)
+	{
+		system("echo 7 > /dev/myled0");
+	}
+	else if(number == 8)
+	{
+		system("echo 8 > /dev/myled0");
+	}
+	else if(number == 9)
+	{
+		system("echo 9 > /dev/myled0");
+	}
 }
 
 void random_number(void)
